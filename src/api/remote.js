@@ -1,31 +1,35 @@
-const host = 'http://localhost:5000/';
+const host = 'https://baas.kinvey.com/';
+const appKey = "kid_BJeRg664Q";
+const appSecret = "0840d04393624d4aba597ea2368369b0";
 
-async function register(name, email, password) {
-    const res = await fetch(host + 'auth/signup', {
+async function register(username, password) {
+    const res = await fetch(host + 'user/' + appKey, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': "Basic " + btoa(appKey + ':' + appSecret)
         },
         body: JSON.stringify({
-            name,
-            email,
+            username,
             password
         })
     });
     return await res.json();
 }
 
-async function login(email, password) {
-    const res = await fetch(host + 'auth/login', {
+async function login(username, password) {
+    const res = await fetch(host + 'user/' + appKey + '/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': "Basic " + btoa(appKey + ':' + appSecret)
         },
         body: JSON.stringify({
-            email,
+            username,
             password
         })
     });
+
     return await res.json();
 }
 

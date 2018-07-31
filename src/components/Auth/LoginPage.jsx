@@ -8,7 +8,7 @@ class LoginPage extends Component {
         super(props);
 
         this.state = {
-            email: '',
+            username: '',
             password: '' 
         };
 
@@ -22,7 +22,7 @@ class LoginPage extends Component {
 
     onSubmitHandler(e) {
         e.preventDefault();
-        this.props.login(this.state.email, this.state.password);
+        this.props.login(this.state.username, this.state.password);
     }
 
     componentWillReceiveProps(newProps) {
@@ -38,10 +38,10 @@ class LoginPage extends Component {
                 <h1>Login</h1>
                 <form onSubmit={this.onSubmitHandler}>
                     <Input
-                        name="email"
-                        value={this.state.email}
+                        name="username"
+                        value={this.state.username}
                         onChange={this.onChangeHandler}
-                        label="E-mail"
+                        label="Username"
                     />
                     <Input
                         name="password"
@@ -65,7 +65,7 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
     return {
-        login: (email, password) => dispatch(loginAction(email, password)),
+        login: (username, password) => dispatch(loginAction(username, password)),
         redirect: () => dispatch(redirect())
     };
 }

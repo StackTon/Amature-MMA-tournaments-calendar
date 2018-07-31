@@ -8,8 +8,7 @@ class RegisterPage extends Component {
         super(props);
 
         this.state = {
-            name: '',
-            email: '',
+            username: '',
             password: '',
             repeat: ''
         };
@@ -24,7 +23,7 @@ class RegisterPage extends Component {
 
     onSubmitHandler(e) {
         e.preventDefault();
-        this.props.register(this.state.name, this.state.email, this.state.password);
+        this.props.register(this.state.username, this.state.password);
     }
 
     componentWillReceiveProps(newProps) {
@@ -40,16 +39,10 @@ class RegisterPage extends Component {
                 <h1>Register</h1>
                 <form onSubmit={this.onSubmitHandler}>
                     <Input
-                        name="name"
-                        value={this.state.name}
+                        name="username"
+                        value={this.state.username}
                         onChange={this.onChangeHandler}
-                        label="Name"
-                    />
-                    <Input
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.onChangeHandler}
-                        label="E-mail"
+                        label="Username"
                     />
                     <Input
                         name="password"
@@ -80,7 +73,7 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
     return {
-        register: (name, email, password) => dispatch(registerAction(name, email, password)),
+        register: (username, password) => dispatch(registerAction(username, password)),
         redirect: () => dispatch(redirect())
     };
 }

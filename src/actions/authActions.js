@@ -19,9 +19,9 @@ export function redirect() {
     };
 }
 
-function registerAction(name, email, password) {
+function registerAction(username, password) {
     return (dispatch) => {
-        return register(name, email, password)
+        return register(username, password)
             .then(json => {
                 if (json.success) {
                     dispatch(registerSuccess());
@@ -30,13 +30,16 @@ function registerAction(name, email, password) {
     };
 }
 
-function loginAction(email, password) {
+function loginAction(username, password) {
     return (dispatch) => {
-        return login(email, password)
+        return login(username, password)
             .then(json => {
-                localStorage.setItem('authToken', json.token);
-                localStorage.setItem('user', json.user.name);
+                /*
+                localStorage.setItem('authToken', json._kmd.authtoken);
                 dispatch(loginSuccess());
+                */
+                console.log("login success!")
+                console.log(json)
             });
     };
 }
