@@ -6,6 +6,14 @@ import LoginPage from './components/Auth/LoginPage';
 import HomePage from './components/HomePage/HomePage';
 import { connect } from 'react-redux';
 import { logoutAction } from './actions/authActions';
+import TournamentDetailsPage from './components/AuthorizedUser/TournamentDetailsPage/TournamentDetailsPage';
+import RegisterForTournamentPage from './components/AuthorizedUser/RegisterForTournamentPage/RegisterForTournamentPage';
+import CreateTournament from './components/AuthorizedUser/CreateTournamentPage/CreateTournament';
+import ApprovelTounamets from './components/AdminUser/ApprovelTournametsPage/ApprovelTournaments';
+import AdminPage from './components/AdminUser/AdminPanelPage/AdminPage';
+import EditTounamentPage from './components/AdminUser/EditTounamentPage/EditTounamentPage';
+import PageNotFound from './components/common/PageNotFound';
+
 
 class App extends Component {
     constructor(props) {
@@ -27,6 +35,14 @@ class App extends Component {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/register" component={RegisterPage} />
+                    <Route path="/tournament/:tournament" exact component={TournamentDetailsPage} />
+                    <Route path="/tournament/register/:tournament" component={RegisterForTournamentPage} />
+                    <Route path="/tournament/edit/:tournament" component={EditTounamentPage} />
+                    <Route path="/create/tournament" component={CreateTournament} />
+                    <Route path="/approvel/tournamens" component={ApprovelTounamets} />
+                    <Route path="/admin/panel" component={AdminPage} />
+                    <Route path="" component={PageNotFound} />
+                    
                 </Switch>
             </div>
         );
