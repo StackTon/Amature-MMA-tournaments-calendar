@@ -9,7 +9,7 @@ class LoginPage extends Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '' 
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
