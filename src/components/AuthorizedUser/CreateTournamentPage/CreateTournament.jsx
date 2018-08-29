@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../../common/Input';
+import { connect } from 'react-redux';
+import { createTournametAction, redirect } from '../../../actions/tournametActions';
 
 
 class CreateTournament extends Component {
@@ -14,12 +16,41 @@ class CreateTournament extends Component {
             place: "",
             date: ""
         }
+
+        //bind
+
+        this.onSubmitHandler = this.onSubmitHandler.bind(this);
+        this.onChangeHandler = this.onChangeHandler.bind(this);
     }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.createTournametSuccess) {
+            this.props.redirect();
+            this.props.history.push('/');
+        }
+    }
+
+    onSubmitHandler(e) {
+        e.preventDefault();
+        this.props.createTournamet(
+            this.state.imgUrl,
+            this.state.price,
+            this.state.name,
+            this.state.info,
+            this.state.place,
+            this.state.date
+        );
+    }
+
+    onChangeHandler(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
     render() {
         return (
             <div>
                 <h1>Create Tournament</h1>
-                <form>
+                <form onClick={this.onSubmitHandler}>
                     <Input
                         name="imgUrl"
                         value={this.state.imgUrl}
@@ -64,4 +95,17 @@ class CreateTournament extends Component {
     }
 }
 
-export default CreateTournament;
+function mapState(state) {
+    return {
+        createTournametSuccess: state.login.success
+    };
+}
+
+function mapDispatch(dispatch) {
+    return {
+        createTournamet: (imgUrl, price, name, info, place, date) => dispatch(createTournametAction(imgUrl, price, name, info, place, date)),
+        redirect: () => dispatch(redirect())
+    };
+}
+
+export default connect(mapState, mapDispatch)(CreateTournament);

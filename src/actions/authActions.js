@@ -34,12 +34,9 @@ function loginAction(username, password) {
     return (dispatch) => {
         return login(username, password)
             .then(json => {
-                /*
                 localStorage.setItem('authToken', json._kmd.authtoken);
                 dispatch(loginSuccess());
-                */
                 console.log("login success!")
-                console.log(json)
             });
     };
 }

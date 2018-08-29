@@ -33,4 +33,24 @@ async function login(username, password) {
     return await res.json();
 }
 
-export { register, login };
+async function createTournamet(imgUrl, price, name, info, place, date) {
+    const res = await fetch(host + 'appdata/' + appKey + '/Tournaments', {
+        method: 'Post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Kinvey ' + localStorage.getItem('authToken')
+        },
+        body: JSON.stringify({
+            imgUrl,
+            price,
+            name,
+            info,
+            place,
+            date
+        })
+    });
+
+    return await res.json();
+}
+
+export { register, login, createTournamet };

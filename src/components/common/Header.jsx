@@ -8,12 +8,12 @@ export default class Header extends Component {
         return (
             <header>
                 <NavLink exact to="/" activeClassName="active">Home</NavLink>
-                {loggedIn && <a href="javascript:void(0)" onClick={onLogout}>Logout</a>}
                 {!loggedIn && <NavLink to="/login" activeClassName="active">Login</NavLink>}
                 {!loggedIn && <NavLink to="/register" activeClassName="active">Register</NavLink>}
-                {!loggedIn && <NavLink to="/create/tournament" activeClassName="active">Create Tounamet</NavLink>}
+                {loggedIn && <NavLink to="/create/tournament" activeClassName="active">Create Tounamet</NavLink>}
                 {!loggedIn && <NavLink to="/approvel/tournamens" activeClassName="active">Approvel Tounamets</NavLink>}
                 {!loggedIn && <NavLink to="/admin/panel" activeClassName="active">Admin Panel</NavLink>}
+                {loggedIn && <a href="javascript:void(0)" onClick={onLogout}>Logout</a>}
             </header>
         );
     }
