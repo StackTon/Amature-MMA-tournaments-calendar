@@ -53,4 +53,16 @@ async function createTournamet(imgUrl, price, name, info, place, date) {
     return await res.json();
 }
 
-export { register, login, createTournamet };
+async function getTournaments(){
+    const res = await fetch(host + "appdata/" + appKey + "/Tournaments", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Kinvey ' + localStorage.getItem('authToken')
+        }
+    });
+
+    return await res.json();
+}
+
+export { register, login, createTournamet, getTournaments };

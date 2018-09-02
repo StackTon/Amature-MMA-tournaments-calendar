@@ -1,59 +1,52 @@
 import React, { Component } from 'react';
+import Tournament from "./Tournament";
+import { connect } from 'react-redux';
+import { getTournamentsAction } from "../../actions/tournametActions";
 
-export default class HomePage extends Component {
+class HomePage extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount() {
+        this.props.getTournaments();
+    }
+
     render() {
+        let tounamets = this.props.tournaments || [[]];
+
         return (
             <div className="container">
                 <h1>Welecom to amature MMA tounamets calendar</h1>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma"/>
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <button>Details</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma"/>
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <button>Details</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma"/>
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <button>Details</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma"/>
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <button>Details</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma"/>
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <button>Details</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma"/>
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <button>Details</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
+                {tounamets[0].map(el => {
+                    console.log(el)
+                    return (
+                        <Tournament
+                            key={el._id}
+                            imgUrl={el.imgUrl}
+                            name={el.name}
+                            place={el.place}
+                        />
+                    )
+                })}
+
             </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    console.log(state.tournaments.tournaments);
+
+    return {
+        tournaments: state.tournaments.tournaments
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getTournaments: () => dispatch(getTournamentsAction())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
