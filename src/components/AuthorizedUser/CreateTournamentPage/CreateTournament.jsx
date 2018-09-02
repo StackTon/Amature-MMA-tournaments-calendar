@@ -31,6 +31,7 @@ class CreateTournament extends Component {
     }
 
     onSubmitHandler(e) {
+        console.log("here");
         e.preventDefault();
         this.props.createTournamet(
             this.state.imgUrl,
@@ -50,7 +51,7 @@ class CreateTournament extends Component {
         return (
             <div>
                 <h1>Create Tournament</h1>
-                <form onClick={this.onSubmitHandler}>
+                <form onSubmit={this.onSubmitHandler}>
                     <Input
                         name="imgUrl"
                         value={this.state.imgUrl}
@@ -95,12 +96,6 @@ class CreateTournament extends Component {
     }
 }
 
-function mapState(state) {
-    return {
-        createTournametSuccess: state.login.success
-    };
-}
-
 function mapDispatch(dispatch) {
     return {
         createTournamet: (imgUrl, price, name, info, place, date) => dispatch(createTournametAction(imgUrl, price, name, info, place, date)),
@@ -108,4 +103,4 @@ function mapDispatch(dispatch) {
     };
 }
 
-export default connect(mapState, mapDispatch)(CreateTournament);
+export default connect(null, mapDispatch)(CreateTournament);
