@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import TournamentForApprovel from './TournamentForApprovel';
-import { getTournamentsForApprovelAction } from "../../../actions/tournametActions";
+import { getTournamentsForApprovelAction, deleteTournamentForApprovalAction, createTournametAction } from "../../../actions/tournametActions";
 import { connect } from "react-redux";
 
 class ApprovelTounamets extends Component {
     constructor(props) {
         super(props);
+
+        //bind
+        this.onApprovelClicked = this.onApprovelClicked.bind(this);
+        this.onDeleteClicked = this.onDeleteClicked.bind(this);
     }
 
     componentWillMount() {
         this.props.getTournamentsForApprovel();
     }
 
+    onApprovelClicked(id, imgUrl, price, name, info, place, date) {
+        this.props.deleteTournamentForApproval(id);
+        this.props.createTournamet(imgUrl, price, name, info, place, date);
+        
+    }
+
+    onDeleteClicked(id) {
+        this.props.deleteTournamentForApproval(id);
+    }
 
     render() {
         const tournamentsForApprovel = this.props.tournamentsForApprovel;
@@ -23,11 +36,14 @@ class ApprovelTounamets extends Component {
                     return (
                         <TournamentForApprovel
                             key={el._id}
+                            id={el._id}
                             imgUrl={el.imgUrl}
                             name={el.name}
                             place={el.place}
                             price={el.price}
                             info={el.info}
+                            onApprovelClicked={this.onApprovelClicked}
+                            onDeleteClicked={this.onDeleteClicked}
                         />
                     )
                 })}
@@ -44,7 +60,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getTournamentsForApprovel: () => dispatch(getTournamentsForApprovelAction())
+        getTournamentsForApprovel: () => dispatch(getTournamentsForApprovelAction()),
+        deleteTournamentForApproval: id => dispatch(deleteTournamentForApprovalAction(id)),
+        createTournamet: (imgUrl, price, name, info, place, date) => dispatch(createTournametAction(imgUrl, price, name, info, place, date)),
     };
 }
 

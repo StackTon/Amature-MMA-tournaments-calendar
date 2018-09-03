@@ -1,16 +1,17 @@
 import React from "react";
 
 export default (props) => {
+    const { imgUrl, price, name, info, place, date, id, onApprovelClicked, onDeleteClicked } = props
     return (
         <div>
-            <img src={props.imgUrl} alt="mma" />
-            <h2>{props.name}</h2>
-            <div>{props.place}</div>
-            <div>price: {props.price}$</div>
-            <div>date: {props.date}</div>
-            <div>{props.info}</div>
-            <button>Approvel</button>
-            <button>Cancel</button>
+            <img src={imgUrl} alt="mma" />
+            <h2>{name}</h2>
+            <div>{place}</div>
+            <div>price: {price}$</div>
+            <div>date: {date}</div>
+            <div>{info}</div>
+            <button onClick={() => onApprovelClicked(id, imgUrl, price, name, info, place, date)}>Approvel</button>
+            <button onClick={() => onDeleteClicked(id)}>Delete</button>
         </div>
     )
 }

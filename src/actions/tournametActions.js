@@ -1,10 +1,18 @@
-import { CREATE_TOURNAMENT_SUCCESS, GET_TOURNAMENTS_SUCCESS, GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS, AJAX_BEGIN, AJAX_ERROR, REDIRECTED } from './actionTypes'
-import { createTournamet, getTournaments, getTournamentsForApproval } from '../api/remote'
+import { CREATE_TOURNAMENT_SUCCESS, GET_TOURNAMENTS_SUCCESS, GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS,DELETE_TOURNAMENT_FOR_APPROVAL_SUCCESS , AJAX_BEGIN, AJAX_ERROR, REDIRECTED } from './actionTypes'
+import { createTournamet, getTournaments, getTournamentsForApproval, deleteTournamentForApproval } from '../api/remote'
 
-function createTournametSuccess () {
+function createTournametForApprovalSuccess (data) {
   return {
-    type: CREATE_TOURNAMENT_SUCCESS
+    type: CREATE_TOURNAMENT_SUCCESS,
+    data
   }
+}
+
+function createTournametSuccess (data) {
+    return {
+      type: CREATE_TOURNAMENT_SUCCESS,
+      data
+    }
 }
 
 function getTournamentsSuccess (data) {
@@ -21,18 +29,48 @@ function getTournamentsForApprovalSuccess (data) {
   }
 }
 
+function deleteTournamentForApprovalSuccess (id) {
+  return {
+    type: DELETE_TOURNAMENT_FOR_APPROVAL_SUCCESS,
+    id
+  }
+}
+
 export function redirect() {
   return {
       type: REDIRECTED
   };
 }
 
+function createTournametForApprovalAction (imgUrl, price, name, info, place, date) {
+  return async (dispatch) => {
+    dispatch({ type: AJAX_BEGIN });
+    try{
+      const data = await createTournamet(imgUrl, price, name, info, place, date, "ForApproval");
+      dispatch(createTournametForApprovalSuccess(data));
+    }
+    catch (err) {
+      dispatch({
+        type: AJAX_ERROR,
+        err
+    });
+    }
+  }
+}
+
 function createTournametAction (imgUrl, price, name, info, place, date) {
   return async (dispatch) => {
-    return createTournamet(imgUrl, price, name, info, place, date)
-      .then(json => {
-        dispatch(createTournametSuccess())
-      })
+    dispatch({ type: AJAX_BEGIN });
+    try{
+      const data = await createTournamet(imgUrl, price, name, info, place, date);
+      dispatch(createTournametSuccess(data));
+    }
+    catch (err) {
+      dispatch({
+        type: AJAX_ERROR,
+        err
+    });
+    }
   }
 }
 
@@ -68,4 +106,20 @@ function getTournamentsForApprovelAction () {
   }
 }
 
-export { createTournametAction, getTournamentsAction, getTournamentsForApprovelAction }
+function deleteTournamentForApprovalAction (id) {
+  return async (dispatch) => {
+    dispatch({ type: AJAX_BEGIN });
+    try{
+      await deleteTournamentForApproval(id);
+      dispatch(deleteTournamentForApprovalSuccess(id));
+    }
+    catch (err) {
+      dispatch({
+        type: AJAX_ERROR,
+        err
+    });
+    }
+  }
+}
+
+export {createTournametAction, createTournametForApprovalAction, getTournamentsAction, getTournamentsForApprovelAction, deleteTournamentForApprovalAction }

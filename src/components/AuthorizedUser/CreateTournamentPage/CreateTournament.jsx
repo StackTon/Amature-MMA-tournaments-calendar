@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../../common/Input';
 import { connect } from 'react-redux';
-import { createTournametAction, redirect } from '../../../actions/tournametActions';
+import { createTournametForApprovalAction, redirect } from '../../../actions/tournametActions';
 
 
 class CreateTournament extends Component {
@@ -24,16 +24,15 @@ class CreateTournament extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.createTournametSuccess) {
+        if (newProps.createTournametForApprovelSuccess) {
             this.props.redirect();
             this.props.history.push('/');
         }
     }
 
     onSubmitHandler(e) {
-        console.log("here");
         e.preventDefault();
-        this.props.createTournamet(
+        this.props.createTournametForApproval(
             this.state.imgUrl,
             this.state.price,
             this.state.name,
@@ -98,7 +97,7 @@ class CreateTournament extends Component {
 
 function mapDispatch(dispatch) {
     return {
-        createTournamet: (imgUrl, price, name, info, place, date) => dispatch(createTournametAction(imgUrl, price, name, info, place, date)),
+        createTournametForApproval: (imgUrl, price, name, info, place, date) => dispatch(createTournametForApprovalAction(imgUrl, price, name, info, place, date)),
         redirect: () => dispatch(redirect())
     };
 }
