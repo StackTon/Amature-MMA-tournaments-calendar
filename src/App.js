@@ -3,7 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/common/Header';
 import RegisterPage from './components/Auth/RegisterPage';
 import LoginPage from './components/Auth/LoginPage';
-import HomePage from './components/HomePage/HomePage';
+import HomePage from './components/AuthorizedUser/HomePage/HomePage';
 import { connect } from 'react-redux';
 import { logoutAction } from './actions/authActions';
 import TournamentDetailsPage from './components/AuthorizedUser/TournamentDetailsPage/TournamentDetailsPage';

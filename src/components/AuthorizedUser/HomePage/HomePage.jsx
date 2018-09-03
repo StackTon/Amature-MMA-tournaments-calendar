@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Tournament from "./Tournament";
 import { connect } from 'react-redux';
-import { getTournamentsAction } from "../../actions/tournametActions";
+import { getTournamentsAction } from "../../../actions/tournametActions";
 
 class HomePage extends Component {
     constructor(props) {

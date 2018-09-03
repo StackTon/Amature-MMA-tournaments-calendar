@@ -1,5 +1,5 @@
-import { CREATE_TOURNAMENT_SUCCESS, GET_TOURNAMENTS_SUCCESS, AJAX_BEGIN, AJAX_ERROR, REDIRECTED } from './actionTypes'
-import { createTournamet, getTournaments } from '../api/remote'
+import { CREATE_TOURNAMENT_SUCCESS, GET_TOURNAMENTS_SUCCESS, GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS, AJAX_BEGIN, AJAX_ERROR, REDIRECTED } from './actionTypes'
+import { createTournamet, getTournaments, getTournamentsForApproval } from '../api/remote'
 
 function createTournametSuccess () {
   return {
@@ -10,6 +10,13 @@ function createTournametSuccess () {
 function getTournamentsSuccess (data) {
   return {
     type: GET_TOURNAMENTS_SUCCESS,
+    data
+  }
+}
+
+function getTournamentsForApprovalSuccess (data) {
+  return {
+    type: GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS,
     data
   }
 }
@@ -45,4 +52,20 @@ function getTournamentsAction () {
   }
 }
 
-export { createTournametAction, getTournamentsAction }
+function getTournamentsForApprovelAction () {
+  return async (dispatch) => {   
+    dispatch({ type: AJAX_BEGIN });
+    try{
+      const data = await getTournamentsForApproval();
+      dispatch(getTournamentsForApprovalSuccess(data))
+    }
+    catch (err) {
+      dispatch({
+        type: AJAX_ERROR,
+        err
+    });
+    }
+  }
+}
+
+export { createTournametAction, getTournamentsAction, getTournamentsForApprovelAction }

@@ -34,7 +34,7 @@ async function login(username, password) {
 }
 
 async function createTournamet(imgUrl, price, name, info, place, date) {
-    const res = await fetch(host + 'appdata/' + appKey + '/Tournaments', {
+    const res = await fetch(host + 'appdata/' + appKey + '/TournamentsForApproval', {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json',
@@ -65,4 +65,16 @@ async function getTournaments(){
     return await res.json();
 }
 
-export { register, login, createTournamet, getTournaments };
+async function getTournamentsForApproval() {
+    const res = await fetch(host + "appdata/" + appKey + "/TournamentsForApproval", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Kinvey ' + localStorage.getItem('authToken')
+        }
+    });
+
+    return await res.json();
+}
+
+export { register, login, createTournamet, getTournaments, getTournamentsForApproval };

@@ -1,43 +1,51 @@
 import React, { Component } from 'react';
+import TournamentForApprovel from './TournamentForApprovel';
+import { getTournamentsForApprovelAction } from "../../../actions/tournametActions";
+import { connect } from "react-redux";
 
 class ApprovelTounamets extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount() {
+        this.props.getTournamentsForApprovel();
+    }
+
+
     render() {
+        const tournamentsForApprovel = this.props.tournamentsForApprovel;
+
         return (
             <div>
                 <h1>Approvel Tounamets</h1>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma" />
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <div>price: 20$</div>
-                    <div>date: 20/08/2018</div>
-                    <div>INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo </div>
-                    <button>Approvel</button>
-                    <button>Cancel</button>
-                </div>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma" />
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <div>price: 20$</div>
-                    <div>date: 20/08/2018</div>
-                    <div>INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo </div>
-                    <button>Approvel</button>
-                    <button>Cancel</button>
-                </div>
-                <div>
-                    <img src="https://i2-prod.mirror.co.uk/incoming/article9250973.ece/ALTERNATES/s615/UFC-205-Alvarez-v-McGregor.jpg" alt="mma" />
-                    <h2>Tounamet name</h2>
-                    <div>Bulgaria, Kyustendil</div>
-                    <div>price: 20$</div>
-                    <div>date: 20/08/2018</div>
-                    <div>INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo INFo </div>
-                    <button>Approvel</button>
-                    <button>Cancel</button>
-                </div>
+                {tournamentsForApprovel.map(el => {
+                    return (
+                        <TournamentForApprovel
+                            key={el._id}
+                            imgUrl={el.imgUrl}
+                            name={el.name}
+                            place={el.place}
+                            price={el.price}
+                            info={el.info}
+                        />
+                    )
+                })}
             </div>
         );
     }
 }
 
-export default ApprovelTounamets;
+function mapStateToProps(state) {
+    return {
+        tournamentsForApprovel: state.tournamentsForApprovel
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getTournamentsForApprovel: () => dispatch(getTournamentsForApprovelAction())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApprovelTounamets);
