@@ -1,10 +1,9 @@
 import { CREATE_TOURNAMENT_SUCCESS, GET_TOURNAMENTS_SUCCESS, AJAX_BEGIN, AJAX_ERROR, REDIRECTED } from './actionTypes'
 import { createTournamet, getTournaments } from '../api/remote'
 
-function createTournametSuccess (data) {
+function createTournametSuccess () {
   return {
-    type: CREATE_TOURNAMENT_SUCCESS,
-    data
+    type: CREATE_TOURNAMENT_SUCCESS
   }
 }
 

@@ -13,13 +13,12 @@ class HomePage extends Component {
     }
 
     render() {
-        let tounamets = this.props.tournaments || [[]];
+        const tounamets = this.props.tournaments;
 
         return (
             <div className="container">
                 <h1>Welecom to amature MMA tounamets calendar</h1>
-                {tounamets[0].map(el => {
-                    console.log(el)
+                {tounamets.map(el => {
                     return (
                         <Tournament
                             key={el._id}
@@ -36,10 +35,8 @@ class HomePage extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.tournaments.tournaments);
-
     return {
-        tournaments: state.tournaments.tournaments
+        tournaments: state.tournaments
     };
 }
 
