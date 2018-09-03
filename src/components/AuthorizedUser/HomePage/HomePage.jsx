@@ -1,15 +1,32 @@
 import React, { Component } from 'react';
 import Tournament from "./Tournament";
 import { connect } from 'react-redux';
-import { getTournamentsAction } from "../../../actions/tournametActions";
+import { getTournamentsAction, deleteTournamentAction } from "../../../actions/tournametActions";
 
 class HomePage extends Component {
     constructor(props) {
         super(props);
+
+        //bind
+        this.onDetailsClicked = this.onDetailsClicked.bind(this);
+        this.onEditClicked = this.onEditClicked.bind(this);
+        this.onDeleteClicked = this.onDeleteClicked.bind(this);
     }
 
     componentWillMount() {
         this.props.getTournaments();
+    }
+
+    onDetailsClicked(id) {
+        this.props.history.push('/tournament/' + id);
+    }
+
+    onEditClicked(id) {
+        this.props.history.push('/tournament/edit/' + id);
+    }
+
+    onDeleteClicked(id) {
+        this.props.deleteTournament(id);
     }
 
     render() {
@@ -22,9 +39,13 @@ class HomePage extends Component {
                     return (
                         <Tournament
                             key={el._id}
+                            id={el._id}
                             imgUrl={el.imgUrl}
                             name={el.name}
                             place={el.place}
+                            onDetailsClicked={this.onDetailsClicked}
+                            onEditClicked={this.onEditClicked}
+                            onDeleteClicked={this.onDeleteClicked}
                         />
                     )
                 })}
@@ -42,7 +63,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getTournaments: () => dispatch(getTournamentsAction())
+        getTournaments: () => dispatch(getTournamentsAction()),
+        deleteTournament: id => dispatch(deleteTournamentAction(id))
     };
 }
 

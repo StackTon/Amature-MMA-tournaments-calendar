@@ -34,7 +34,7 @@ async function login(username, password) {
 }
 
 async function createTournamet(imgUrl, price, name, info, place, date, end = "" ) {
-    //ForApproval
+
     const res = await fetch(host + 'appdata/' + appKey + '/Tournaments' + end, {
         method: 'Post',
         headers: {
@@ -78,8 +78,8 @@ async function getTournamentsForApproval() {
     return await res.json();
 }
 
-async function deleteTournamentForApproval(id) {
-    const res = await fetch(host + "appdata/" + appKey + `/TournamentsForApproval/?query={"_id":"${id}"}`, {
+async function deleteTournament(id, end = "") {
+    const res = await fetch(host + "appdata/" + appKey + `/Tournaments${end}/?query={"_id":"${id}"}`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Kinvey ' + localStorage.getItem('authToken')
@@ -89,4 +89,4 @@ async function deleteTournamentForApproval(id) {
     return await res.json();
 }
 
-export { register, login, createTournamet, getTournaments, getTournamentsForApproval, deleteTournamentForApproval };
+export { register, login, createTournamet, getTournaments, getTournamentsForApproval, deleteTournament };

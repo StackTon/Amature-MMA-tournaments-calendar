@@ -13,6 +13,7 @@ import ApprovelTounamets from './components/AdminUser/ApprovelTournametsPage/App
 import AdminPage from './components/AdminUser/AdminPanelPage/AdminPage';
 import EditTounamentPage from './components/AdminUser/EditTounamentPage/EditTounamentPage';
 import PageNotFound from './components/common/PageNotFound';
+import UnauthHome from "./components/UnauthHome";
 
 
 class App extends Component {
@@ -28,16 +29,18 @@ class App extends Component {
     }
 
     render() {
+
         return (
+
             <div className="App">
                 <Header loggedIn={localStorage.getItem('authToken') != null} onLogout={this.onLogout} />
                 <Switch>
-                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/" component={localStorage.getItem('authToken') === null ? UnauthHome : HomePage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/register" component={RegisterPage} />
-                    <Route path="/tournament/:tournament" exact component={TournamentDetailsPage} />
-                    <Route path="/tournament/register/:tournament" component={RegisterForTournamentPage} />
-                    <Route path="/tournament/edit/:tournament" component={EditTounamentPage} />
+                    <Route path="/tournament/:id" exact component={TournamentDetailsPage} />
+                    <Route path="/tournament/register/:id" component={RegisterForTournamentPage} />
+                    <Route path="/tournament/edit/:id" component={EditTounamentPage} />
                     <Route path="/create/tournament" component={CreateTournament} />
                     <Route path="/approvel/tournamens" component={ApprovelTounamets} />
                     <Route path="/admin/panel" component={AdminPage} />

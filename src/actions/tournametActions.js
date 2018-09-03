@@ -1,5 +1,20 @@
-import { CREATE_TOURNAMENT_SUCCESS, GET_TOURNAMENTS_SUCCESS, GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS,DELETE_TOURNAMENT_FOR_APPROVAL_SUCCESS , AJAX_BEGIN, AJAX_ERROR, REDIRECTED } from './actionTypes'
-import { createTournamet, getTournaments, getTournamentsForApproval, deleteTournamentForApproval } from '../api/remote'
+import {
+  CREATE_TOURNAMENT_SUCCESS,
+  GET_TOURNAMENTS_SUCCESS,
+  GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS,
+  DELETE_TOURNAMENT_FOR_APPROVAL_SUCCESS,
+  DELETE_TOURNAMENT_SUCCESS,
+  AJAX_BEGIN,
+  AJAX_ERROR,
+  REDIRECTED 
+} from './actionTypes';
+
+import {
+  createTournamet,
+  getTournaments,
+  getTournamentsForApproval,
+  deleteTournament
+} from '../api/remote';
 
 function createTournametForApprovalSuccess (data) {
   return {
@@ -36,11 +51,21 @@ function deleteTournamentForApprovalSuccess (id) {
   }
 }
 
+function deleteTournamentSuccess(id) {
+  return {
+    type: DELETE_TOURNAMENT_SUCCESS,
+    id
+  }
+}
+
 export function redirect() {
   return {
       type: REDIRECTED
   };
 }
+
+
+
 
 function createTournametForApprovalAction (imgUrl, price, name, info, place, date) {
   return async (dispatch) => {
@@ -110,7 +135,7 @@ function deleteTournamentForApprovalAction (id) {
   return async (dispatch) => {
     dispatch({ type: AJAX_BEGIN });
     try{
-      await deleteTournamentForApproval(id);
+      await deleteTournament(id, "ForApproval");
       dispatch(deleteTournamentForApprovalSuccess(id));
     }
     catch (err) {
@@ -122,4 +147,27 @@ function deleteTournamentForApprovalAction (id) {
   }
 }
 
-export {createTournametAction, createTournametForApprovalAction, getTournamentsAction, getTournamentsForApprovelAction, deleteTournamentForApprovalAction }
+function deleteTournamentAction(id) {
+  return async (dispatch) => {
+    dispatch({ type: AJAX_BEGIN });
+    try{
+      await deleteTournament(id);
+      dispatch(deleteTournamentSuccess(id));
+    }
+    catch (err) {
+      dispatch({
+        type: AJAX_ERROR,
+        err
+    });
+    }
+  }
+}
+
+export { 
+  createTournametAction,
+  createTournametForApprovalAction,
+  getTournamentsAction,
+  getTournamentsForApprovelAction,
+  deleteTournamentForApprovalAction,
+  deleteTournamentAction 
+}
