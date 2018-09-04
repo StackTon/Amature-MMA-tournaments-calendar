@@ -5,8 +5,8 @@ import { logoutAction } from './actions/authActions';
 
 // components
 import Header from './components/common/Header';
-import Register from './components/Auth/Register';
-import Login from './components/Auth/Login';
+import Register from './components/UnauthorizedUser/Register';
+import Login from './components/UnauthorizedUser/Login';
 import Home from './components/AuthorizedUser/Home/Home';
 import CreateTournament from './components/AuthorizedUser/CreateTournament/CreateTournament';
 import AdminPanel from './components/AdminUser/AdminPanel/AdminPanel';
