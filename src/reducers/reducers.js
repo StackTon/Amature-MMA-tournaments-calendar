@@ -1,5 +1,6 @@
 import { registerReducer, loginReducer } from './authReducer';
-import { tournamentsReducer, tournamentsForApprovelReducer } from './tournamentsReducer';
+import { tournamentsReducer } from './tournamentsReducer';
+import { tournamentsForApprovelReducer } from './tournamentsForApprovelReducer';
 
 export default {
     register: registerReducer,

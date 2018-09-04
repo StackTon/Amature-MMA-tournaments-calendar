@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Input from '../../common/Input';
 import { connect } from 'react-redux';
-import { createTournametForApprovalAction, redirect } from '../../../actions/tournametActions';
+import { redirect } from '../../../actions/tournametsActions';
+import { createTournametForApprovalAction } from '../../../actions/tournamentsForApprovelActions';
 
 
 class CreateTournament extends Component {

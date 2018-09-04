@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TournamentForApprovel from './TournamentForApprovel';
-import { getTournamentsForApprovelAction, deleteTournamentForApprovalAction, createTournametAction } from "../../../actions/tournametActions";
+import { createTournametAction } from "../../../actions/tournametsActions";
+import { getTournamentsForApprovelAction, deleteTournamentForApprovalAction } from '../../../actions/tournamentsForApprovelActions';
 import { connect } from "react-redux";
 
 class ApprovelTounamets extends Component {
@@ -19,7 +20,7 @@ class ApprovelTounamets extends Component {
     onApprovelClicked(id, imgUrl, price, name, info, place, date) {
         this.props.deleteTournamentForApproval(id);
         this.props.createTournamet(imgUrl, price, name, info, place, date);
-        
+
     }
 
     onDeleteClicked(id) {
