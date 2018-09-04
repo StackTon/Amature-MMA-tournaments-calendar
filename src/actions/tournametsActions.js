@@ -2,6 +2,7 @@ import {
   CREATE_TOURNAMENT_SUCCESS,
   GET_TOURNAMENTS_SUCCESS,
   DELETE_TOURNAMENT_SUCCESS,
+  GET_TOURNAMENT_BY_ID_SUCCESS,
   AJAX_BEGIN,
   AJAX_ERROR,
   REDIRECTED 
@@ -10,7 +11,8 @@ import {
 import {
   createTournamet,
   getTournaments,
-  deleteTournamentById
+  deleteTournamentById,
+  getTournamentById
 } from '../api/remote';
 
 function createTournametSuccess (data) {
@@ -31,6 +33,13 @@ function deleteTournamentSuccess(id) {
   return {
     type: DELETE_TOURNAMENT_SUCCESS,
     id
+  }
+}
+
+function getTournamentByIdSuccess(data) {
+  return {
+    type: GET_TOURNAMENT_BY_ID_SUCCESS,
+    data
   }
 }
 
@@ -89,8 +98,25 @@ function deleteTournamentAction(id) {
   }
 }
 
+function getTournamentByIdAction(id) {
+  return async (dispatch) => {
+    dispatch({ type: AJAX_BEGIN });
+    try {
+      const data = await getTournamentById(id);
+      dispatch(getTournamentByIdSuccess(data));
+    }
+    catch (err) {
+      dispatch({
+        type: AJAX_BEGIN,
+        err
+      })
+    }
+  }
+}
+
 export { 
   createTournametAction,
   getTournamentsAction,
-  deleteTournamentAction 
+  deleteTournamentAction,
+  getTournamentByIdAction
 }
