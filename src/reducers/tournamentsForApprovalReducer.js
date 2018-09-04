@@ -2,7 +2,7 @@ import { GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS, DELETE_TOURNAMENT_FOR_APPROVAL_SU
 
 const initialState = [];
 
-export function tournamentsForApprovelReducer (state = initialState , action) {
+export function tournamentsForApprovalReducer (state = initialState , action) {
   switch (action.type) {
     case GET_TOURNAMENTS_FOR_APPROVAL_SUCCESS:
       return action.data;

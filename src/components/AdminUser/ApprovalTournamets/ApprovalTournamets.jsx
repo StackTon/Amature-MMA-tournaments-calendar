@@ -28,7 +28,7 @@ class ApprovalTournamets extends Component {
     }
 
     render() {
-        const tournamentsForApproval = this.props.tournamentsForApproval;
+        const tournamentsForApproval = this.props.tournamentsForApproval || [];
 
         return (
             <div>

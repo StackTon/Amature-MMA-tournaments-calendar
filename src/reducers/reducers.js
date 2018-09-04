@@ -1,11 +1,11 @@
 import { registerReducer, loginReducer } from './authReducer';
 import { tournamentsReducer, detailsTournamentReducer } from './tournamentsReducer';
-import { tournamentsForApprovelReducer } from './tournamentsForApprovelReducer';
+import { tournamentsForApprovalReducer } from './tournamentsForApprovalReducer';
 
 export default {
     register: registerReducer,
     login: loginReducer,
     tournaments: tournamentsReducer,
-    tournamentsForApprovel: tournamentsForApprovelReducer,
+    tournamentsForApproval: tournamentsForApprovalReducer,
     detailsTournament: detailsTournamentReducer
 };
