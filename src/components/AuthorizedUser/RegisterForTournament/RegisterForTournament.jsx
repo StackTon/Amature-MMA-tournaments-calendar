@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../../common/Input';
 
-class RegisterForTournamentPage extends Component {
+class RegisterForTournament extends Component {
     constructor(props) {
         super(props);
 
@@ -42,4 +42,4 @@ class RegisterForTournamentPage extends Component {
     }
 }
 
-export default RegisterForTournamentPage;
+export default RegisterForTournament;

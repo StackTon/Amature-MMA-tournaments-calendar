@@ -3,7 +3,7 @@ import Input from '../common/Input';
 import { connect } from 'react-redux';
 import { loginAction, redirect } from '../../actions/authActions';
 
-class LoginPage extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -70,4 +70,4 @@ function mapDispatch(dispatch) {
     };
 }
 
-export default connect(mapState, mapDispatch)(LoginPage);
+export default connect(mapState, mapDispatch)(Login);

@@ -46,7 +46,7 @@ function createTournametForApprovalAction (imgUrl, price, name, info, place, dat
     }
 }
 
-function getTournamentsForApprovelAction () {
+function getTournamentsForApprovalAction () {
     return async (dispatch) => {   
       dispatch({ type: AJAX_BEGIN });
       try{
@@ -78,4 +78,4 @@ function deleteTournamentForApprovalAction (id) {
     }
 }
 
-export { createTournametForApprovalAction, getTournamentsForApprovelAction, deleteTournamentForApprovalAction }
+export { createTournametForApprovalAction, getTournamentsForApprovalAction, deleteTournamentForApprovalAction }

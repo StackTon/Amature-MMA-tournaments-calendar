@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getTournamentByIdAction } from '../../../actions/tournametsActions';
 
-class TournamentDetailsPage extends Component {
+class Details extends Component {
     constructor(props) {
         super(props);
 
@@ -46,4 +46,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TournamentDetailsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Details);

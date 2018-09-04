@@ -3,7 +3,7 @@ import Tournament from "./Tournament";
 import { connect } from 'react-redux';
 import { getTournamentsAction, deleteTournamentAction } from "../../../actions/tournametsActions";
 
-class HomePage extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
 
@@ -68,4 +68,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

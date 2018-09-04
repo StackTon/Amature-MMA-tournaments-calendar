@@ -3,7 +3,7 @@ import Input from '../common/Input';
 import { connect } from 'react-redux';
 import { registerAction, redirect } from '../../actions/authActions';
 
-class RegisterPage extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
 
@@ -78,4 +78,4 @@ function mapDispatch(dispatch) {
     };
 }
 
-export default connect(mapState, mapDispatch)(RegisterPage);
+export default connect(mapState, mapDispatch)(Register);

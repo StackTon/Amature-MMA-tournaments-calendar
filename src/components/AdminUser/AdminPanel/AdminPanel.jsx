@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AdminPage extends Component {
+class AdminPanel extends Component {
     render() {
         return (
             <div>
@@ -30,4 +30,4 @@ class AdminPage extends Component {
     }
 }
 
-export default AdminPage;
+export default AdminPanel;

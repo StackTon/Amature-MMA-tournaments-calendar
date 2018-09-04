@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import TournamentForApprovel from './TournamentForApprovel';
+import TournamentForApproval from './TournamentForApproval';
 import { createTournametAction } from "../../../actions/tournametsActions";
-import { getTournamentsForApprovelAction, deleteTournamentForApprovalAction } from '../../../actions/tournamentsForApprovelActions';
+import { getTournamentsForApprovalAction, deleteTournamentForApprovalAction } from '../../../actions/tournamentsForApprovalActions';
 import { connect } from "react-redux";
 
-class ApprovelTounamets extends Component {
+class ApprovalTournamets extends Component {
     constructor(props) {
         super(props);
 
         //bind
-        this.onApprovelClicked = this.onApprovelClicked.bind(this);
+        this.onApprovalClicked = this.onApprovalClicked.bind(this);
         this.onDeleteClicked = this.onDeleteClicked.bind(this);
     }
 
     componentWillMount() {
-        this.props.getTournamentsForApprovel();
+        this.props.getTournamentsForApproval();
     }
 
-    onApprovelClicked(id, imgUrl, price, name, info, place, date) {
+    onApprovalClicked(id, imgUrl, price, name, info, place, date) {
         this.props.deleteTournamentForApproval(id);
         this.props.createTournamet(imgUrl, price, name, info, place, date);
 
@@ -28,14 +28,14 @@ class ApprovelTounamets extends Component {
     }
 
     render() {
-        const tournamentsForApprovel = this.props.tournamentsForApprovel;
+        const tournamentsForApproval = this.props.tournamentsForApproval;
 
         return (
             <div>
-                <h1>Approvel Tounamets</h1>
-                {tournamentsForApprovel.map(el => {
+                <h1>Approval Tounamets</h1>
+                {tournamentsForApproval.map(el => {
                     return (
-                        <TournamentForApprovel
+                        <TournamentForApproval
                             key={el._id}
                             id={el._id}
                             imgUrl={el.imgUrl}
@@ -43,7 +43,7 @@ class ApprovelTounamets extends Component {
                             place={el.place}
                             price={el.price}
                             info={el.info}
-                            onApprovelClicked={this.onApprovelClicked}
+                            onApprovalClicked={this.onApprovalClicked}
                             onDeleteClicked={this.onDeleteClicked}
                         />
                     )
@@ -55,16 +55,16 @@ class ApprovelTounamets extends Component {
 
 function mapStateToProps(state) {
     return {
-        tournamentsForApprovel: state.tournamentsForApprovel
+        tournamentsForApproval: state.tournamentsForApproval
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getTournamentsForApprovel: () => dispatch(getTournamentsForApprovelAction()),
+        getTournamentsForApproval: () => dispatch(getTournamentsForApprovalAction()),
         deleteTournamentForApproval: id => dispatch(deleteTournamentForApprovalAction(id)),
         createTournamet: (imgUrl, price, name, info, place, date) => dispatch(createTournametAction(imgUrl, price, name, info, place, date)),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApprovelTounamets);
+export default connect(mapStateToProps, mapDispatchToProps)(ApprovalTournamets);

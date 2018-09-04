@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import Header from './components/common/Header';
-import RegisterPage from './components/Auth/RegisterPage';
-import LoginPage from './components/Auth/LoginPage';
-import HomePage from './components/AuthorizedUser/HomePage/HomePage';
 import { connect } from 'react-redux';
 import { logoutAction } from './actions/authActions';
-import TournamentDetailsPage from './components/AuthorizedUser/TournamentDetailsPage/TournamentDetailsPage';
-import RegisterForTournamentPage from './components/AuthorizedUser/RegisterForTournamentPage/RegisterForTournamentPage';
-import CreateTournament from './components/AuthorizedUser/CreateTournamentPage/CreateTournament';
-import ApprovelTounamets from './components/AdminUser/ApprovelTournametsPage/ApprovelTournaments';
-import AdminPage from './components/AdminUser/AdminPanelPage/AdminPage';
-import EditTounamentPage from './components/AdminUser/EditTounamentPage/EditTounamentPage';
+
+// components
+import Header from './components/common/Header';
+import Register from './components/Auth/Register';
+import Login from './components/Auth/Login';
+import Home from './components/AuthorizedUser/Home/Home';
+import CreateTournament from './components/AuthorizedUser/CreateTournament/CreateTournament';
+import AdminPanel from './components/AdminUser/AdminPanel/AdminPanel';
 import PageNotFound from './components/common/PageNotFound';
-import UnauthHome from "./components/UnauthHome";
+import UnauthHome from "./components/UnauthorizedUser/UnauthHome";
+import Details from './components/AuthorizedUser/Details/Details';
+import RegisterForTournament from './components/AuthorizedUser/RegisterForTournament/RegisterForTournament';
+import ApprovalTournamets from './components/AdminUser/ApprovalTournamets/ApprovalTournamets';
+import EditTounament from './components/AdminUser/EditTounament/EditTounament';
+
 
 
 class App extends Component {
@@ -35,15 +38,15 @@ class App extends Component {
             <div className="App">
                 <Header loggedIn={localStorage.getItem('authToken') != null} onLogout={this.onLogout} />
                 <Switch>
-                    <Route exact path="/" component={localStorage.getItem('authToken') === null ? UnauthHome : HomePage} />
-                    <Route path="/login" component={LoginPage} />
-                    <Route path="/register" component={RegisterPage} />
-                    <Route path="/tournament/:id" exact component={TournamentDetailsPage} />
-                    <Route path="/tournament/register/:id" component={RegisterForTournamentPage} />
-                    <Route path="/tournament/edit/:id" component={EditTounamentPage} />
+                    <Route exact path="/" component={localStorage.getItem('authToken') === null ? UnauthHome : Home} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/tournament/:id" exact component={Details} />
+                    <Route path="/tournament/register/:id" component={RegisterForTournament} />
+                    <Route path="/tournament/edit/:id" component={EditTounament} />
                     <Route path="/create/tournament" component={CreateTournament} />
-                    <Route path="/approvel/tournamens" component={ApprovelTounamets} />
-                    <Route path="/admin/panel" component={AdminPage} />
+                    <Route path="/approvel/tournamens" component={ApprovalTournamets} />
+                    <Route path="/admin/panel" component={AdminPanel} />
                     <Route path="" component={PageNotFound} />
                     
                 </Switch>
