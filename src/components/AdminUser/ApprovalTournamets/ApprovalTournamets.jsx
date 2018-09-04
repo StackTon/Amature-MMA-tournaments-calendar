@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import TournamentForApproval from './TournamentForApproval';
 import { createTournametAction } from "../../../actions/tournametsActions";
 import { getTournamentsForApprovalAction, deleteTournamentForApprovalAction } from '../../../actions/tournamentsForApprovalActions';
 import { connect } from "react-redux";
+import TournamentBox from '../../common/TournamentBox';
 
 class ApprovalTournamets extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class ApprovalTournamets extends Component {
                 <h1>Approval Tounamets</h1>
                 {tournamentsForApproval.map(el => {
                     return (
-                        <TournamentForApproval
+                        <TournamentBox
                             key={el._id}
                             id={el._id}
                             imgUrl={el.imgUrl}

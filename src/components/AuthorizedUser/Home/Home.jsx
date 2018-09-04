@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Tournament from "./Tournament";
 import { connect } from 'react-redux';
 import { getTournamentsAction, deleteTournamentAction } from "../../../actions/tournametsActions";
+import TournamentBox from "../../common/TournamentBox";
 
 class Home extends Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class Home extends Component {
                 <h1>Welecom to amature MMA tounamets calendar</h1>
                 {tounamets.map(el => {
                     return (
-                        <Tournament
+                        <TournamentBox
                             key={el._id}
                             id={el._id}
                             imgUrl={el.imgUrl}
