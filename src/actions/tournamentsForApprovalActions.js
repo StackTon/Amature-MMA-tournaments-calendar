@@ -30,6 +30,8 @@ function deleteTournamentForApprovalSuccess (id) {
   id}
 }
 
+
+
 function createTournametForApprovalAction (imgUrl, price, name, info, place, date) {
     return async (dispatch) => {
       dispatch({ type: AJAX_BEGIN });

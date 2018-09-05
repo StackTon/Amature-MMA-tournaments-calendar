@@ -11,7 +11,8 @@ async function register(username, password) {
         },
         body: JSON.stringify({
             username,
-            password
+            password,
+            isAdmin: false
         })
     });
     return await res.json();

@@ -16,6 +16,7 @@ import Details from './components/AuthorizedUser/Details/Details';
 import RegisterForTournament from './components/AuthorizedUser/RegisterForTournament/RegisterForTournament';
 import ApprovalTournamets from './components/AdminUser/ApprovalTournamets/ApprovalTournamets';
 import EditTounament from './components/AdminUser/EditTounament/EditTounament';
+import PrivateRoute from './components/common/PrivateRoute';
 
 
 
@@ -36,17 +37,17 @@ class App extends Component {
         return (
 
             <div className="App">
-                <Header loggedIn={localStorage.getItem('authToken') != null} onLogout={this.onLogout} />
+                <Header isAdmin={this.props.isAdmin} loggedIn={localStorage.getItem('authToken') != null} onLogout={this.onLogout} />
                 <Switch>
                     <Route exact path="/" component={localStorage.getItem('authToken') === null ? UnauthHome : Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    <Route path="/tournament/:id" exact component={Details} />
-                    <Route path="/tournament/register/:id" component={RegisterForTournament} />
-                    <Route path="/tournament/edit/:id" component={EditTounament} />
-                    <Route path="/create/tournament" component={CreateTournament} />
-                    <Route path="/approvel/tournamens" component={ApprovalTournamets} />
-                    <Route path="/admin/panel" component={AdminPanel} />
+                    <PrivateRoute path="/tournament/:id" exact component={Details} isAdmin={true} />
+                    <PrivateRoute path="/tournament/register/:id" component={RegisterForTournament} isAdmin={true} />
+                    <PrivateRoute path="/tournament/edit/:id" component={EditTounament} isAdmin={this.props.isAdmin} />
+                    <PrivateRoute path="/create/tournament" component={CreateTournament} isAdmin={true} />
+                    <PrivateRoute path="/approvel/tournamens" component={ApprovalTournamets} isAdmin={this.props.isAdmin} />
+                    <PrivateRoute path="/admin/panel" component={AdminPanel} isAdmin={this.props.isAdmin} />
                     <Route path="" component={PageNotFound} />
                     
                 </Switch>
@@ -56,7 +57,9 @@ class App extends Component {
 }
 
 function mapState(state) {
-    return {};
+    return {
+        isAdmin: state.login.isAdmin
+    };
 }
 
 function mapDispatch(dispatch) {

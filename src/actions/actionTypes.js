@@ -4,6 +4,7 @@ export const AJAX_ERROR = 'AJAX_ERROR';
 // auth
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const REDIRECTED = 'REDIRECTED';
 
 // tournaments
